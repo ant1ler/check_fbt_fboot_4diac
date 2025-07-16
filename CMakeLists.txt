@@ -5,10 +5,10 @@ project(CHECK_FBT_FBOOT_4DIAC)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Опция для сборки pugixml как статической библиотеки
+# Опция для сборки pugixml как статической библиотеки (если она всё ещё нужна)
 option(PUGIXML_BUILD_STATIC "Build pugixml as static library" ON)
 
-# Добавляем pugixml как подпроект
+# Добавляем pugixml как подпроект (если он всё ещё используется)
 add_subdirectory(pugixml-master)
 
 # Список исходных файлов проекта
@@ -31,23 +31,21 @@ set(HEADERS
 # Создаем исполняемый файл
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
-# Подключаем pugixml к нашему проекту
-target_link_libraries(${PROJECT_NAME} PRIVATE pugixml-static)  # Используем статическую версию
+# Подключаем pugixml (если он нужен)
+target_link_libraries(${PROJECT_NAME} PRIVATE pugixml-static)
 
 # Указываем пути к заголовочным файлам
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/pugixml/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/pugixml/src  # (если pugixml всё ещё используется)
 )
 
-# Копируем XML файлы из корня проекта в директорию сборки
-file(GLOB XML_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.xml")
-foreach(XML_FILE ${XML_FILES})
-    configure_file(${XML_FILE} ${CMAKE_BINARY_DIR} COPYONLY)
-endforeach()
-
-# Копируем системные файлы (.sys, .fboot) если нужно
-file(GLOB SYS_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.sys" "${CMAKE_CURRENT_SOURCE_DIR}/*.fboot")
-foreach(SYS_FILE ${SYS_FILES})
-    configure_file(${SYS_FILE} ${CMAKE_BINARY_DIR} COPYONLY)
+# Копируем только .sys и .fboot файлы из папки files в директорию сборки
+file(GLOB CONFIG_FILES 
+    "${CMAKE_CURRENT_SOURCE_DIR}/files/*.sys" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/files/*.fboot"
+)
+foreach(CONFIG_FILE ${CONFIG_FILES})
+    get_filename_component(FILE_NAME ${CONFIG_FILE} NAME)
+    configure_file(${CONFIG_FILE} ${CMAKE_BINARY_DIR}/${FILE_NAME} COPYONLY)
 endforeach()
