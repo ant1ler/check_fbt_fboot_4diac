@@ -1,0 +1,10 @@
+;<Request ID="1" Action="CREATE"><FB Name="EMB_RES" Type="EMB_RES" /></Request>
+EMB_RES;<Request ID="2" Action="CREATE"><FB Name="check_fbt_fbootApp.STRING2STRING" Type="STRING2STRING" /></Request>
+EMB_RES;<Request ID="3" Action="WRITE"><Connection Source="&apos;gruppa les&apos;" Destination="check_fbt_fbootApp.STRING2STRING.IN" /></Request>
+EMB_RES;<Request ID="4" Action="CREATE"><FB Name="check_fbt_fbootApp.OUT_ANY_CONSOLE" Type="OUT_ANY_CONSOLE" /></Request>
+EMB_RES;<Request ID="5" Action="WRITE"><Connection Source="TRUE" Destination="check_fbt_fbootApp.OUT_ANY_CONSOLE.QI" /></Request>
+EMB_RES;<Request ID="6" Action="WRITE"><Connection Source="&apos;vyvod&apos;" Destination="check_fbt_fbootApp.OUT_ANY_CONSOLE.LABEL" /></Request>
+EMB_RES;<Request ID="7" Action="CREATE"><Connection Source="check_fbt_fbootApp.STRING2STRING.CNF" Destination="check_fbt_fbootApp.OUT_ANY_CONSOLE.REQ" /></Request>
+EMB_RES;<Request ID="8" Action="CREATE"><Connection Source="START.COLD" Destination="check_fbt_fbootApp.STRING2STRING.REQ" /></Request>
+EMB_RES;<Request ID="9" Action="CREATE"><Connection Source="check_fbt_fbootApp.STRING2STRING.OUT" Destination="check_fbt_fbootApp.OUT_ANY_CONSOLE.IN" /></Request>
+EMB_RES;<Request ID="10" Action="START"/>

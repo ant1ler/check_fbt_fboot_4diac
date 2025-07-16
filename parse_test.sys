@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="parse_test">
+	<VersionInfo Version="1.0" Author="ant1ler" Date="2025-07-16">
+	</VersionInfo>
+	<Application Name="parse_testApp">
+		<SubAppNetwork>
+			<FB Name="OUT_ANY_CONSOLE" Type="OUT_ANY_CONSOLE" x="3400" y="-700">
+			</FB>
+			<FB Name="OUT_ANY_CONSOLE_1" Type="OUT_ANY_CONSOLE" x="3400" y="400">
+			</FB>
+			<FB Name="STRING2STRING" Type="STRING2STRING" x="1500" y="-600">
+				<Parameter Name="IN" Value="'812'"/>
+			</FB>
+			<FB Name="STRING2STRING_1" Type="STRING2STRING" x="1500" y="500">
+				<Parameter Name="IN" Value="'long life'"/>
+			</FB>
+			<EventConnections>
+				<Connection Source="STRING2STRING.CNF" Destination="OUT_ANY_CONSOLE.REQ" dx1="517.65"/>
+				<Connection Source="STRING2STRING_1.CNF" Destination="OUT_ANY_CONSOLE_1.REQ" dx1="517.65"/>
+			</EventConnections>
+			<DataConnections>
+				<Connection Source="STRING2STRING.OUT" Destination="OUT_ANY_CONSOLE.IN" dx1="517.65"/>
+				<Connection Source="STRING2STRING_1.OUT" Destination="OUT_ANY_CONSOLE_1.IN" dx1="517.65"/>
+			</DataConnections>
+		</SubAppNetwork>
+	</Application>
+	<Device Name="FORTE_PC" Type="FORTE_PC" x="2388.24" y="794.12">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61499&quot;" Comment="Device manager socket ID"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC"/>
+		<Attribute Name="Color" Type="STRING" Value="255,190,111"/>
+		<Resource Name="EMB_RES" Type="EMB_RES" x="0" y="0">
+			<FBNetwork>
+				<FB Name="BOOL2BOOL" Type="BOOL2BOOL" x="5500" y="0">
+				</FB>
+				<EventConnections>
+					<Connection Source="START.COLD" Destination="parse_testApp.STRING2STRING.REQ" dx1="364.71"/>
+					<Connection Source="START.WARM" Destination="parse_testApp.STRING2STRING_1.REQ" dx1="364.71"/>
+					<Connection Source="parse_testApp.OUT_ANY_CONSOLE.CNF" Destination="BOOL2BOOL.REQ" dx1="170.59"/>
+				</EventConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
+	<Segment Name="Ethernet" Type="Ethernet" x="2858.82" y="1988.24" dx1="1764.71">
+		<Attribute Name="Color" Type="STRING" Value="43,194,152"/>
+	</Segment>
+	<Mapping From="parse_testApp.STRING2STRING_1" To="FORTE_PC.EMB_RES"/>
+	<Mapping From="parse_testApp.STRING2STRING" To="FORTE_PC.EMB_RES"/>
+	<Mapping From="parse_testApp.OUT_ANY_CONSOLE_1" To="FORTE_PC.EMB_RES"/>
+	<Mapping From="parse_testApp.OUT_ANY_CONSOLE" To="FORTE_PC.EMB_RES"/>
+	<Link SegmentName="Ethernet" CommResource="FORTE_PC" Comment="">
+	</Link>
+</System>
