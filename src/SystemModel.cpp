@@ -14,6 +14,10 @@ void SystemModel::add_connection(Connection connect){
     connection.push_back(connect);
 }
 
+void SystemModel::add_mapping(Mapping mapp){
+    mapping.push_back(mapp);
+}
+
 void SystemModel::get_structure(){
 
     std::cout << "Functional Blocks:" << std::endl;
@@ -31,6 +35,12 @@ void SystemModel::get_structure(){
     std::cout << "Connections:" << std::endl;
     for(int i = 0; i < connection.size(); i++){
         connection[i].get_info();
+    }
+    std::cout  << std::endl;
+
+    std::cout << "Mapping:" << std::endl;
+    for(int i = 0; i < mapping.size(); i++){
+        mapping[i].get_info();
     }
     std::cout  << std::endl;
 }
@@ -68,6 +78,15 @@ Connection SystemModel::parse_connect(pugi::xml_node connect_node){
 
 }
 
+Mapping SystemModel::parse_mapping(pugi::xml_node mapping_node){
+    Mapping mapp;
+
+    mapp.from = mapping_node.attribute("From").as_string();
+    mapp.to = mapping_node.attribute("To").as_string();
+
+    return mapp;
+}
+
 void SystemModel::parse(std::string sys_filename){
 
     pugi::xml_document doc;
@@ -102,5 +121,9 @@ void SystemModel::parse(std::string sys_filename){
         for(pugi::xml_node node_temp : dev_even_con.children("Connection")){
             add_connection(parse_connect(node_temp));
         }
+    }
+
+    for(pugi::xml_node mapp_node : system_node.children("Mapping")){
+        add_mapping(parse_mapping(mapp_node));
     }
 }

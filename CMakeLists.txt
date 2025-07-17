@@ -18,6 +18,7 @@ set(SOURCES
     src/FunctionalBlock.cpp
     src/Resource.cpp
     src/SystemModel.cpp
+    src/Mapping.cpp
 )
 
 # Список заголовочных файлов проекта
@@ -26,6 +27,7 @@ set(HEADERS
     include/FunctionalBlock.h
     include/Resource.h
     include/SystemModel.h
+    include/Mapping.h
 )
 
 # Создаем исполняемый файл

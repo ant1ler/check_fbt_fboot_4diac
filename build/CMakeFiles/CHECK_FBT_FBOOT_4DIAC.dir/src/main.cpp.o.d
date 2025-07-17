@@ -156,4 +156,5 @@ CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
  /home/ant1ler/check_fbt_fboot_4diac/include/Resource.h \
- /home/ant1ler/check_fbt_fboot_4diac/include/Connection.h
+ /home/ant1ler/check_fbt_fboot_4diac/include/Connection.h \
+ /home/ant1ler/check_fbt_fboot_4diac/include/Mapping.h

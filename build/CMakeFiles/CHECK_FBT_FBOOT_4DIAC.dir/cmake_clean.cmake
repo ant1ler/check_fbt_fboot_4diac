@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Connection.cpp.o.d"
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/FunctionalBlock.cpp.o"
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/FunctionalBlock.cpp.o.d"
+  "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Mapping.cpp.o"
+  "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Mapping.cpp.o.d"
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Resource.cpp.o"
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Resource.cpp.o.d"
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/SystemModel.cpp.o"

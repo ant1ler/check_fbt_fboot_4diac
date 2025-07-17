@@ -235,6 +235,30 @@ src/FunctionalBlock.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/build.make CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/FunctionalBlock.cpp.s
 .PHONY : src/FunctionalBlock.cpp.s
 
+src/Mapping.o: src/Mapping.cpp.o
+.PHONY : src/Mapping.o
+
+# target to build an object file
+src/Mapping.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/build.make CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Mapping.cpp.o
+.PHONY : src/Mapping.cpp.o
+
+src/Mapping.i: src/Mapping.cpp.i
+.PHONY : src/Mapping.i
+
+# target to preprocess a source file
+src/Mapping.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/build.make CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Mapping.cpp.i
+.PHONY : src/Mapping.cpp.i
+
+src/Mapping.s: src/Mapping.cpp.s
+.PHONY : src/Mapping.s
+
+# target to generate assembly for a file
+src/Mapping.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/build.make CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Mapping.cpp.s
+.PHONY : src/Mapping.cpp.s
+
 src/Resource.o: src/Resource.cpp.o
 .PHONY : src/Resource.o
 
@@ -327,6 +351,9 @@ help:
 	@echo "... src/FunctionalBlock.o"
 	@echo "... src/FunctionalBlock.i"
 	@echo "... src/FunctionalBlock.s"
+	@echo "... src/Mapping.o"
+	@echo "... src/Mapping.i"
+	@echo "... src/Mapping.s"
 	@echo "... src/Resource.o"
 	@echo "... src/Resource.i"
 	@echo "... src/Resource.s"
