@@ -2,5 +2,5 @@
 #include<iostream>
 
 void Connection::get_info(){
-    std::cout << "FB " << start << " connected to FB " << end << '\n';
+    std::cout  << start << " connected to " << end << '\n';
 }

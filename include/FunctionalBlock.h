@@ -10,6 +10,7 @@ public:
     std::string name;
     std::string type;
     std::vector< std::pair<std::string, std::string> > params;
+    std::string resource;
 
 public:
 

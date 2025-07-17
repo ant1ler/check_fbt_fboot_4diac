@@ -21,9 +21,10 @@ public:
     void add_connection(Connection connect);
     void add_mapping(Mapping mapp);
     void get_structure();
-    FunctionalBlock parse_fb(pugi::xml_node fb_node);
-    Resource parse_res(pugi::xml_node res_node);
-    Connection parse_connect(pugi::xml_node connect_node);
+    FunctionalBlock parse_fb(std::string project_name, pugi::xml_node fb_node);
+    Resource parse_res(std::string device_name, pugi::xml_node res_node);
+    Connection parse_fb_connect(std::string project_name, pugi::xml_node connect_node);
+    Connection parse_resource_connect(pugi::xml_node connect_node);
     Mapping parse_mapping(pugi::xml_node mapping_node);
     void parse(std::string filename);
 };

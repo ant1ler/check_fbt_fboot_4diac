@@ -4,13 +4,15 @@
 #include<vector>
 
 void FunctionalBlock::get_info(){
-    std::cout << "FB Name: " << FunctionalBlock::name << "; " << "FB Type: " << FunctionalBlock::type << '\n';
-    if(FunctionalBlock::params.size() != 0){
+    std::cout << "FB Name: " << name << "; " << "FB Type: " << type << '\n';
+    if(params.size() != 0){
         std::cout << "FB Parameters:" << '\n';
-        for(int i = 0; i < FunctionalBlock::params.size(); i++){
-            std::cout << "Name: " << FunctionalBlock::params[i].first << "; " << "Value: " << FunctionalBlock::params[i].second << '\n';
+        for(int i = 0; i < params.size(); i++){
+            std::cout << "Name: " << params[i].first << "; " << "Value: " << params[i].second << '\n';
         }
     }
+
+    std::cout << "FB Resource: " << resource << std::endl;
     
     std::cout << std::endl;
 }
