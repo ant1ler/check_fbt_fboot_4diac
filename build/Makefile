@@ -211,6 +211,30 @@ src/Connection.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/build.make CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Connection.cpp.s
 .PHONY : src/Connection.cpp.s
 
+src/FbootModel.o: src/FbootModel.cpp.o
+.PHONY : src/FbootModel.o
+
+# target to build an object file
+src/FbootModel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/build.make CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/FbootModel.cpp.o
+.PHONY : src/FbootModel.cpp.o
+
+src/FbootModel.i: src/FbootModel.cpp.i
+.PHONY : src/FbootModel.i
+
+# target to preprocess a source file
+src/FbootModel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/build.make CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/FbootModel.cpp.i
+.PHONY : src/FbootModel.cpp.i
+
+src/FbootModel.s: src/FbootModel.cpp.s
+.PHONY : src/FbootModel.s
+
+# target to generate assembly for a file
+src/FbootModel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/build.make CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/FbootModel.cpp.s
+.PHONY : src/FbootModel.cpp.s
+
 src/FunctionalBlock.o: src/FunctionalBlock.cpp.o
 .PHONY : src/FunctionalBlock.o
 
@@ -348,6 +372,9 @@ help:
 	@echo "... src/Connection.o"
 	@echo "... src/Connection.i"
 	@echo "... src/Connection.s"
+	@echo "... src/FbootModel.o"
+	@echo "... src/FbootModel.i"
+	@echo "... src/FbootModel.s"
 	@echo "... src/FunctionalBlock.o"
 	@echo "... src/FunctionalBlock.i"
 	@echo "... src/FunctionalBlock.s"

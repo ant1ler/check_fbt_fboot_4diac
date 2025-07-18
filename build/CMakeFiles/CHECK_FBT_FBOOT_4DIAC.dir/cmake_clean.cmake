@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CHECK_FBT_FBOOT_4DIAC.pdb"
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Connection.cpp.o"
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Connection.cpp.o.d"
+  "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/FbootModel.cpp.o"
+  "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/FbootModel.cpp.o.d"
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/FunctionalBlock.cpp.o"
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/FunctionalBlock.cpp.o.d"
   "CMakeFiles/CHECK_FBT_FBOOT_4DIAC.dir/src/Mapping.cpp.o"

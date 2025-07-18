@@ -19,6 +19,7 @@ set(SOURCES
     src/Resource.cpp
     src/SystemModel.cpp
     src/Mapping.cpp
+    src/FbootModel.cpp
 )
 
 # Список заголовочных файлов проекта
@@ -28,6 +29,7 @@ set(HEADERS
     include/Resource.h
     include/SystemModel.h
     include/Mapping.h
+    include/FbootModel.h
 )
 
 # Создаем исполняемый файл
