@@ -1,9 +1,9 @@
-#include"SystemModel.h"
+#include"SysModel.h"
 #include"FbootModel.h"
 #include<iostream>
 
 int main(){
-    SystemModel sys;
+    SysModel sys;
     FbootModel fboot;
 
     pugi::xml_document doc;
@@ -12,11 +12,15 @@ int main(){
         return 0;
     }
 
-    sys.filename = "/home/ant1ler/check_fbt_fboot_4diac/build/mai_test1.sys";
-    sys.parse(sys.filename);
-    sys.get_structure();
+    std::string sys_filename = "/home/ant1ler/check_fbt_fboot_4diac/build/mai_test1.sys";
+    sys.set_filename(sys_filename);
+    sys.parse(sys.get_filename());
+    sys.print_structure();
+
     std::cout << std::endl;
-    fboot.filename = "/home/ant1ler/check_fbt_fboot_4diac/build/mai_test1_FORTE_PC.fboot";
-    fboot.parse(fboot.filename);
-    fboot.get_structure();
+
+    std::string fboot_filename = "/home/ant1ler/check_fbt_fboot_4diac/build/mai_test1_FORTE_PC.fboot";
+    fboot.set_filename(fboot_filename);
+    fboot.parse(fboot.get_filename());
+    fboot.print_structure();
 }

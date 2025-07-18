@@ -3,7 +3,7 @@
 #include<string>
 #include<vector>
 
-void FunctionalBlock::get_info(){
+void FunctionalBlock::print_info(){
     std::cout << "FB Name: " << name << "; " << "FB Type: " << type << '\n';
     if(params.size() != 0){
         std::cout << "FB Parameters:" << '\n';

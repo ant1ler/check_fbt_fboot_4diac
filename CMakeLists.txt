@@ -5,6 +5,7 @@ project(CHECK_FBT_FBOOT_4DIAC)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
 # Опция для сборки pugixml как статической библиотеки (если она всё ещё нужна)
 option(PUGIXML_BUILD_STATIC "Build pugixml as static library" ON)
 
@@ -17,7 +18,7 @@ set(SOURCES
     src/Connection.cpp
     src/FunctionalBlock.cpp
     src/Resource.cpp
-    src/SystemModel.cpp
+    src/SysModel.cpp
     src/Mapping.cpp
     src/FbootModel.cpp
 )
@@ -27,7 +28,7 @@ set(HEADERS
     include/Connection.h
     include/FunctionalBlock.h
     include/Resource.h
-    include/SystemModel.h
+    include/SysModel.h
     include/Mapping.h
     include/FbootModel.h
 )

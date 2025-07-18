@@ -1,6 +1,6 @@
 #include"Connection.h"
 #include<iostream>
 
-void Connection::get_info(){
+void Connection::print_info(){
     std::cout  << start << " connected to " << end << '\n';
 }

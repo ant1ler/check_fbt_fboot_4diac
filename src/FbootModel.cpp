@@ -14,23 +14,23 @@ void FbootModel::add_connection(Connection connect){
     connection.push_back(connect);
 }
 
-void FbootModel::get_structure(){
+void FbootModel::print_structure(){
 
     std::cout << "Functional Blocks:" << std::endl;
     for(int i = 0; i < fb.size(); i++){
-        fb[i].get_info();
+        fb[i].print_info();
     }
     std::cout  << std::endl;
 
     std::cout << "Resources:" << std::endl;
     for(int i = 0; i < resource.size(); i++){
-        resource[i].get_info();
+        resource[i].print_info();
     }
     std::cout  << std::endl;
 
     std::cout << "Connections:" << std::endl;
     for(int i = 0; i < connection.size(); i++){
-        connection[i].get_info();
+        connection[i].print_info();
     }
     std::cout  << std::endl;
 }
@@ -38,8 +38,8 @@ void FbootModel::get_structure(){
 Resource FbootModel::parse_resource(std::string line){
     Resource res;
 
-    res.name = line.substr(line.find("FB Name") + 9, line.find("Type") - line.find("FB Name") - 11);
-    res.type = line.substr(line.find("Type") + 6, line.rfind("/>") - line.find("Type") - 8);
+    res.set_name(line.substr(line.find("FB Name") + 9, line.find("Type") - line.find("FB Name") - 11));
+    res.set_type(line.substr(line.find("Type") + 6, line.rfind("/>") - line.find("Type") - 8));
 
     return res;
 }
@@ -51,10 +51,10 @@ FunctionalBlock FbootModel::parse_create_fb(std::string line){
     for(int i = 0; i < line.find(";"); i++){
         res += line[i];
     }
-    fb.resource = res;
+    fb.set_resource(res);
 
-    fb.name = line.substr(line.find("FB Name") + 9, line.find("Type") - line.find("FB Name") - 11);
-    fb.type = line.substr(line.find("Type") + 6, line.rfind("/>") - line.find("Type") - 8);
+    fb.set_name(line.substr(line.find("FB Name") + 9, line.find("Type") - line.find("FB Name") - 11));
+    fb.set_type(line.substr(line.find("Type") + 6, line.rfind("/>") - line.find("Type") - 8));
 
     return fb;
 }
@@ -75,8 +75,8 @@ void FbootModel::parse_write_connection(std::string line){
     func_block.erase(func_block.rfind("."), std::string::npos);
 
     for(int i = 0; i < fb.size(); i++){
-        if(fb[i].name == func_block){
-            fb[i].params.push_back({name, value});
+        if(fb[i].get_name() == func_block){
+            fb[i].push_params({name, value});
         }
     }
 }
@@ -84,8 +84,8 @@ void FbootModel::parse_write_connection(std::string line){
 Connection FbootModel::parse_create_connection(std::string line){
     Connection con;
 
-    con.start = line.substr(line.find("Source") + 8, line.find("Destination") - line.find("Source") - 10);
-    con.end = line.substr(line.find("Destination") + 13, line.rfind("/>") - line.find("Destination") - 15);
+    con.set_start(line.substr(line.find("Source") + 8, line.find("Destination") - line.find("Source") - 10));
+    con.set_end(line.substr(line.find("Destination") + 13, line.rfind("/>") - line.find("Destination") - 15));
 
     return con;
 }

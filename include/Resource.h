@@ -5,13 +5,16 @@
 #include<string>
 
 class Resource{
-public:
+private:
     std::string name;
     std::string type;
 
 public:
+    inline void set_name(const std::string& _name){this->name = _name;};
+    inline void set_type(const std::string& _type){this->type = _type;};
 
-    void get_info();
+    inline std::string get_name() const {return this->name;};
+    inline std::string get_type() const {return this->type;};
     
-
+    void print_info();
 };
