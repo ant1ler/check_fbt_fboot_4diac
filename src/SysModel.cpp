@@ -94,7 +94,7 @@ Mapping SysModel::parse_mapping(pugi::xml_node mapping_node){
     mapp.set_from(mapping_node.attribute("From").as_string());
     mapp.set_to(mapping_node.attribute("To").as_string());
     for(int i = 0; i < fb.size(); i++){
-        if(fb[i].get_name() == mapp.get_from()){
+        if(fb[i].get_name() == mapp.get_from()){        
             fb[i].set_resource(mapp.get_to());
         }
     }
@@ -142,5 +142,46 @@ void SysModel::parse(std::string sys_filename){
 
     for(pugi::xml_node mapp_node : system_node.children("Mapping")){
         add_mapping(parse_mapping(mapp_node));
+    }
+}
+
+void SysModel::correction(){
+
+    std::vector<FunctionalBlock> fb_ = fb;
+    for(int i = 0; i < fb_.size(); i++){
+        if(fb_[i].get_resource() == ""){
+            auto iter = fb_.begin() + i;
+            fb_.erase(iter);
+        }
+    }
+    fb = fb_;
+
+    std::vector<Connection> connect = connection;
+    for(int i = 0; i < connect.size(); i++){
+        if(connect[i].get_start().find("START") == std::string::npos){
+            std::string fb_start_name;
+            //std::string fb_start_param;
+
+            std::string fb_end_name;
+            //std::string fb_end_param;
+
+            fb_start_name = connect[i].get_start().substr(0, connect[i].get_start().rfind("."));
+            //fb_start_param = connection[i].get_start().substr(connection[i].get_start().rfind(".") + 1, std::string::npos);
+
+            fb_end_name = connect[i].get_end().substr(0, connect[i].get_end().rfind("."));
+            //fb_end_param = connection[i].get_end().substr(connection[i].get_end().rfind(".") + 1, std::string::npos);
+
+            bool fb1 = false, fb2 = false;
+
+            for(int j = 0; j < fb.size(); j++){
+                if(fb[j].get_name() == fb_start_name) fb1 = true;
+                if(fb[j].get_name() == fb_end_name) fb2 = true;
+            }
+
+            if(fb1 && fb2 == false){
+                auto iter = connect.begin() + i;
+                connect.erase(iter); 
+            } 
+        }
     }
 }

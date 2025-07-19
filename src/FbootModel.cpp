@@ -125,3 +125,32 @@ void FbootModel::parse(std::string filename){
     }
 }
 
+void FbootModel::correction(){
+    for(int i = 0; i < connection.size(); i++){
+        if(connection[i].get_start().find("START") == std::string::npos){
+            std::string fb_start_name;
+            //std::string fb_start_param;
+
+            std::string fb_end_name;
+            //std::string fb_end_param;
+
+            fb_start_name = connection[i].get_start().substr(0, connection[i].get_start().rfind("."));
+            //fb_start_param = connection[i].get_start().substr(connection[i].get_start().rfind(".") + 1, std::string::npos);
+
+            fb_end_name = connection[i].get_end().substr(0, connection[i].get_end().rfind("."));
+            //fb_end_param = connection[i].get_end().substr(connection[i].get_end().rfind(".") + 1, std::string::npos);
+
+            bool fb1 = false, fb2 = false;
+
+            for(int j = 0; j < fb.size(); j++){
+                if(fb[j].get_name() == fb_start_name) fb1 = true;
+                if(fb[j].get_name() == fb_end_name) fb2 = true;
+            }
+
+            if(fb1 && fb2 == false){
+                auto iter = connection.begin() + i;
+                connection.erase(iter); 
+            } 
+        }
+    }
+}

@@ -40,4 +40,6 @@ public:
     Connection parse_resource_connect(pugi::xml_node connect_node);
     Mapping parse_mapping(pugi::xml_node mapping_node);
     void parse(std::string filename);
+
+    void correction();
 };

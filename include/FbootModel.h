@@ -34,4 +34,6 @@ public:
     void parse_write_connection(std::string line);
     Connection parse_create_connection(std::string line);
     void parse(std::string filename);
+
+    void correction();
 };
