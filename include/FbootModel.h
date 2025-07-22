@@ -12,6 +12,7 @@ private:
     std::vector<FunctionalBlock> fb;
     std::vector<Resource> resource;
     std::vector<Connection> connection;
+    bool flag_start = true;
 
 public:
     void add_func_block(FunctionalBlock func_block);
@@ -28,6 +29,7 @@ public:
     inline std::vector<FunctionalBlock> get_fb() const {return this->fb;};
     inline std::vector<Resource> get_resource() const {return this->resource;};
     inline std::vector<Connection> get_connection() const {return this->connection;};
+    inline bool get_flag_start() const {return this->flag_start;};
     
     Resource parse_resource(std::string line);
     FunctionalBlock parse_create_fb(std::string line);

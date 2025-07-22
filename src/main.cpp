@@ -62,6 +62,10 @@ int main(int argc, char* argv[]){
 
     fboot.set_filename(fboot_filename);
     fboot.parse(fboot.get_filename());
+    if(fboot.get_flag_start() == false){
+        std::cout << "Fboot-fyle unable to launch!";
+        return 0;
+    }
     fboot.correction();
 
     if (verbose) {

@@ -122,6 +122,7 @@ Connection FbootModel::parse_create_connection(std::string line){
 void FbootModel::parse(std::string filename){
     std::ifstream file(filename);
     std::string line;
+    int counter = 0;
 
     while(std::getline(file, line)){
 
@@ -151,7 +152,11 @@ void FbootModel::parse(std::string filename){
         if(line.find("Action=/CREATE/><Connection") != std::string::npos){
             add_connection(parse_create_connection(line));
         }
+
+        if(line.find("Action=/START") != std::string::npos){counter++;}
     }
+
+    if(counter != resource.size()) {flag_start = false;}
 }
 
 void FbootModel::correction(){

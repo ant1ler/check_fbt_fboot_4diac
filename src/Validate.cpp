@@ -40,7 +40,7 @@ void validate(const FbootModel& fboot, const SysModel& sys) {
                     std::cout << "Mismatch in FB type:\n";
                     std::cout << "FBOOT: " << fb_fboot.get_fb_line() << "\n";
                     std::cout << "SYS: <FB Name=\"" << fb_sys.get_name() 
-                              << "\" Type=\"" << fb_sys.get_type() << "\"/>\n";
+                              << "\" Type=\"" << fb_sys.get_type() << "...>\n";
                     isValid = sectionValid = false;
                 }
                 break;
@@ -49,7 +49,7 @@ void validate(const FbootModel& fboot, const SysModel& sys) {
         if (!found) {
             std::cout << "FB missing in FBOOT (present in SYS):\n";
             std::cout << "SYS: <FB Name=\"" << fb_sys.get_name() 
-                      << "\" Type=\"" << fb_sys.get_type() << "\"/>\n";
+                      << "\" Type=\"" << fb_sys.get_type() << "...>\n";
             isValid = sectionValid = false;
         }
     }
@@ -91,7 +91,7 @@ void validate(const FbootModel& fboot, const SysModel& sys) {
                                 std::cout << "Mismatch in parameter values:\n";
                                 std::cout << "FBOOT: " << fb_fboot.get_params_line() << "\n";
                                 std::cout << "SYS: <Parameter Name=\"" << param_sys.first 
-                                          << "\" Value=\"" << param_sys.second << "\"/>\n";
+                                          << "\" Value=\"" << param_sys.second << "...>\n";
                                 isValid = sectionValid = false;
                             }
                             break;
@@ -100,7 +100,7 @@ void validate(const FbootModel& fboot, const SysModel& sys) {
                     if (!paramFound) {
                         std::cout << "Parameter missing in FBOOT (present in SYS):\n";
                         std::cout << "SYS: <Parameter Name=\"" << param_sys.first 
-                                  << "\" Value=\"" << param_sys.second << "\"/>\n";
+                                  << "\" Value=\"" << param_sys.second << "...>\n";
                         isValid = sectionValid = false;
                     }
                 }
@@ -148,7 +148,7 @@ void validate(const FbootModel& fboot, const SysModel& sys) {
         if (!found) {
             std::cout << "Connection missing in FBOOT (present in SYS):\n";
             std::cout << "SYS: <Connection Source=\"" << conn_sys.get_start()
-                      << "\" Destination=\"" << conn_sys.get_end() << "\"/>\n";
+                      << "\" Destination=\"" << conn_sys.get_end() << "...>\n";
             isValid = sectionValid = false;
         }
     }
@@ -195,7 +195,7 @@ void validate(const FbootModel& fboot, const SysModel& sys) {
                     std::cout << "Mismatch in resource type:\n";
                     std::cout << "FBOOT: " << res_fboot.get_line() << "\n";
                     std::cout << "SYS: <Resource Name=\"" << sysResNameShort 
-                              << "\" Type=\"" << res_sys.get_type() << "\"/>\n";
+                              << "\" Type=\"" << res_sys.get_type() << "...>\n";
                     isValid = sectionValid = false;
                 }
                 break;
@@ -204,7 +204,7 @@ void validate(const FbootModel& fboot, const SysModel& sys) {
         if (!found) {
             std::cout << "Resource missing in FBOOT (present in SYS):\n";
             std::cout << "SYS: <Resource Name=\"" << sysResNameShort 
-                      << "\" Type=\"" << res_sys.get_type() << "\"/>\n";
+                      << "\" Type=\"" << res_sys.get_type() << "...>\n";
             isValid = sectionValid = false;
         }
     }
