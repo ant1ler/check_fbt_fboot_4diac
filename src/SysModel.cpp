@@ -147,29 +147,23 @@ void SysModel::parse(std::string sys_filename){
 
 void SysModel::correction(){
 
-    std::vector<FunctionalBlock> fb_ = fb;
-    for(int i = 0; i < fb_.size(); i++){
-        if(fb_[i].get_resource() == ""){
-            auto iter = fb_.begin() + i;
-            fb_.erase(iter);
+    std::vector<FunctionalBlock> fb_;
+    for(int i = 0; i < fb.size(); i++){
+        if(fb[i].get_resource().size() != 0){
+            fb_.push_back(fb[i]);
         }
     }
     fb = fb_;
 
-    std::vector<Connection> connect = connection;
-    for(int i = 0; i < connect.size(); i++){
-        if(connect[i].get_start().find("START") == std::string::npos){
+    std::vector<Connection> connect;
+    for(int i = 0; i < connection.size(); i++){
+        if(connection[i].get_start().find("START") == std::string::npos){
+
             std::string fb_start_name;
-            //std::string fb_start_param;
-
             std::string fb_end_name;
-            //std::string fb_end_param;
 
-            fb_start_name = connect[i].get_start().substr(0, connect[i].get_start().rfind("."));
-            //fb_start_param = connection[i].get_start().substr(connection[i].get_start().rfind(".") + 1, std::string::npos);
-
-            fb_end_name = connect[i].get_end().substr(0, connect[i].get_end().rfind("."));
-            //fb_end_param = connection[i].get_end().substr(connection[i].get_end().rfind(".") + 1, std::string::npos);
+            fb_start_name = connection[i].get_start().substr(0, connection[i].get_start().rfind("."));
+            fb_end_name = connection[i].get_end().substr(0, connection[i].get_end().rfind("."));
 
             bool fb1 = false, fb2 = false;
 
@@ -178,10 +172,11 @@ void SysModel::correction(){
                 if(fb[j].get_name() == fb_end_name) fb2 = true;
             }
 
-            if(fb1 && fb2 == false){
-                auto iter = connect.begin() + i;
-                connect.erase(iter); 
+            if(fb1 && fb2){
+                connect.push_back(connection[i]);
             } 
         }
+        else{connect.push_back(connection[i]);}
     }
+    connection = connect;
 }

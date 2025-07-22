@@ -1,16 +1,30 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 project(CHECK_FBT_FBOOT_4DIAC)
 
-# Установка стандарта C++ (C++11 или выше)
+# Установка стандарта C++
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Включаем модуль FetchContent для управления зависимостями
+include(FetchContent)
 
-# Опция для сборки pugixml как статической библиотеки (если она всё ещё нужна)
-option(PUGIXML_BUILD_STATIC "Build pugixml as static library" ON)
+# Настройка и загрузка pugixml
+FetchContent_Declare(
+  pugixml
+  GIT_REPOSITORY https://github.com/zeux/pugixml.git
+  GIT_TAG v1.15
+)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build static libraries")
+set(PUGIXML_BUILD_TESTS OFF CACHE BOOL "Disable tests")
+FetchContent_MakeAvailable(pugixml)
 
-# Добавляем pugixml как подпроект (если он всё ещё используется)
-add_subdirectory(pugixml-master)
+# Настройка и загрузка argparse
+FetchContent_Declare(
+  argparse
+  GIT_REPOSITORY https://github.com/p-ranav/argparse.git
+  GIT_TAG v3.2
+)
+FetchContent_MakeAvailable(argparse)
 
 # Список исходных файлов проекта
 set(SOURCES
@@ -36,21 +50,16 @@ set(HEADERS
 # Создаем исполняемый файл
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
-# Подключаем pugixml (если он нужен)
-target_link_libraries(${PROJECT_NAME} PRIVATE pugixml-static)
+# Подключаем необходимые библиотеки
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    pugixml
+    argparse::argparse
+)
 
-# Указываем пути к заголовочным файлам
+# Указываем пути к заголовочным файлам проекта
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/pugixml/src  # (если pugixml всё ещё используется)
 )
 
-# Копируем только .sys и .fboot файлы из папки files в директорию сборки
-file(GLOB CONFIG_FILES 
-    "${CMAKE_CURRENT_SOURCE_DIR}/files/*.sys" 
-    "${CMAKE_CURRENT_SOURCE_DIR}/files/*.fboot"
-)
-foreach(CONFIG_FILE ${CONFIG_FILES})
-    get_filename_component(FILE_NAME ${CONFIG_FILE} NAME)
-    configure_file(${CONFIG_FILE} ${CMAKE_BINARY_DIR}/${FILE_NAME} COPYONLY)
-endforeach()
+# Опционально: установка выходного каталога для исполняемого файла
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

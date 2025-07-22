@@ -40,6 +40,7 @@ Resource FbootModel::parse_resource(std::string line){
 
     res.set_name(line.substr(line.find("FB Name") + 9, line.find("Type") - line.find("FB Name") - 11));
     res.set_type(line.substr(line.find("Type") + 6, line.rfind("/>") - line.find("Type") - 8));
+    res.set_line(line);
 
     return res;
 }
@@ -55,6 +56,7 @@ FunctionalBlock FbootModel::parse_create_fb(std::string line){
 
     fb.set_name(line.substr(line.find("FB Name") + 9, line.find("Type") - line.find("FB Name") - 11));
     fb.set_type(line.substr(line.find("Type") + 6, line.rfind("/>") - line.find("Type") - 8));
+    fb.set_fb_line(line);
 
     return fb;
 }
@@ -65,8 +67,32 @@ void FbootModel::parse_write_connection(std::string line){
     std::string func_block = "";
 
     value = line.substr(line.find("Source") + 8, line.find("Destination") - line.find("Source") - 10);
-    if(value.find("&apos;") != std::string::npos) value.replace(value.find("&apos;"), 6, "'");
-    if(value.find("&apos;") != std::string::npos) value.replace(value.find("&apos;"), 6, "'");
+
+    while(value.find("&apos;") != std::string::npos){
+        value.replace(value.find("&apos;"), 6, "'");
+    }
+    while(value.find("&quot;") != std::string::npos){
+        value.replace(value.find("&quot;"), 6, "\"");
+    }
+
+    if(value.find("16#") != std::string::npos){
+        std::string hex = value.substr(value.find("16#") + 3, hex.size());
+        int dec = 0;
+
+        for(int i = 0; i < hex.size(); i++){
+            int digit;
+            if(hex[i] >= 'A' and hex[i] <= 'F'){
+                digit = 10 + (hex[i] - 'A');
+            }
+            if(hex[i] >= '0' and hex[i] <= '9'){
+                digit = hex[i] -'0';
+            }
+
+            dec = dec * 16 + digit;
+        }
+        std::string decimal = std::to_string(dec);
+        value = decimal;
+    }
 
     func_block = line.substr(line.find("Destination") + 13, line.rfind("/>") - line.find("Destination") - 15);
 
@@ -77,6 +103,7 @@ void FbootModel::parse_write_connection(std::string line){
     for(int i = 0; i < fb.size(); i++){
         if(fb[i].get_name() == func_block){
             fb[i].push_params({name, value});
+            fb[i].set_params_line(line);
         }
     }
 }
@@ -86,6 +113,8 @@ Connection FbootModel::parse_create_connection(std::string line){
 
     con.set_start(line.substr(line.find("Source") + 8, line.find("Destination") - line.find("Source") - 10));
     con.set_end(line.substr(line.find("Destination") + 13, line.rfind("/>") - line.find("Destination") - 15));
+    con.set_line(line);
+
 
     return con;
 }
@@ -126,19 +155,14 @@ void FbootModel::parse(std::string filename){
 }
 
 void FbootModel::correction(){
-    for(int i = 0; i < connection.size(); i++){
-        if(connection[i].get_start().find("START") == std::string::npos){
+    std::vector<Connection> connect = connection;
+    for(int i = 0; i < connect.size(); i++){
+        if(connect[i].get_start().find("START") == std::string::npos){
             std::string fb_start_name;
-            //std::string fb_start_param;
-
             std::string fb_end_name;
-            //std::string fb_end_param;
-
-            fb_start_name = connection[i].get_start().substr(0, connection[i].get_start().rfind("."));
-            //fb_start_param = connection[i].get_start().substr(connection[i].get_start().rfind(".") + 1, std::string::npos);
-
-            fb_end_name = connection[i].get_end().substr(0, connection[i].get_end().rfind("."));
-            //fb_end_param = connection[i].get_end().substr(connection[i].get_end().rfind(".") + 1, std::string::npos);
+            
+            fb_start_name = connect[i].get_start().substr(0, connect[i].get_start().rfind("."));
+            fb_end_name = connect[i].get_end().substr(0, connect[i].get_end().rfind("."));
 
             bool fb1 = false, fb2 = false;
 
@@ -148,9 +172,10 @@ void FbootModel::correction(){
             }
 
             if(fb1 && fb2 == false){
-                auto iter = connection.begin() + i;
-                connection.erase(iter); 
+                auto iter = connect.begin() + i;
+                connect.erase(iter); 
             } 
         }
     }
+    connection = connect;
 }
