@@ -1,6 +1,10 @@
-#check_fbt_fboot_4diac
+# check_fbt_fboot_4diac
 
-##Installation
+The project was created as part of a student internship at RTSoft.  
+It is used to compare .sys and .fboot files, which is important for further correct work with them.  
+The project is implemented as a console application and accepts several required parameters as input.
+
+## Installation
 
 For the project to work correctly, C++11 or higher must be installed.  
 After installing C++, go to the directory where you want to place the project and run:  
@@ -9,7 +13,7 @@ git clone https://github.com/ant1ler/check_fbt_fboot_4diac
 ```
 Next, go to the /check_fbt_fboot_4diac/ directory to get started.
 
-##Usage
+## Usage
 
 When you have moved to the desired directory, assemble the project, to do this, write in the terminal:
 ```commandline
