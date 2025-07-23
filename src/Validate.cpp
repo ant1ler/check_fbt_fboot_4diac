@@ -39,7 +39,7 @@ void validate(const FbootModel& fboot, const SysModel& sys) {
                 if (fb_sys.get_type() != fb_fboot.get_type()) {
                     std::cout << "Mismatch in FB type:\n";
                     std::cout << "FBOOT: " << fb_fboot.get_fb_line() << "\n";
-                    std::cout << "SYS: <FB Name=\"" << fb_sys.get_name() 
+                    std::cout << "SYS: <FB Name=\"" << fb_sys.get_name().substr(fb_sys.get_name().find(".") + 1, fb_sys.get_name().size()) 
                               << "\" Type=\"" << fb_sys.get_type() << "...>\n";
                     isValid = sectionValid = false;
                 }
@@ -48,7 +48,7 @@ void validate(const FbootModel& fboot, const SysModel& sys) {
         }
         if (!found) {
             std::cout << "FB missing in FBOOT (present in SYS):\n";
-            std::cout << "SYS: <FB Name=\"" << fb_sys.get_name() 
+            std::cout << "SYS: <FB Name=\"" << fb_sys.get_name().substr(fb_sys.get_name().find(".") + 1, fb_sys.get_name().size()) 
                       << "\" Type=\"" << fb_sys.get_type() << "...>\n";
             isValid = sectionValid = false;
         }
@@ -147,8 +147,8 @@ void validate(const FbootModel& fboot, const SysModel& sys) {
         }
         if (!found) {
             std::cout << "Connection missing in FBOOT (present in SYS):\n";
-            std::cout << "SYS: <Connection Source=\"" << conn_sys.get_start()
-                      << "\" Destination=\"" << conn_sys.get_end() << "...>\n";
+            std::cout << "SYS: <Connection Source=\"" << conn_sys.get_start().substr(conn_sys.get_start().find(".") + 1, conn_sys.get_start().size())
+                      << "\" Destination=\"" << conn_sys.get_end().substr(conn_sys.get_end().find(".") + 1, conn_sys.get_end().size()) << "...>\n";
             isValid = sectionValid = false;
         }
     }
